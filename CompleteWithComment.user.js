@@ -6,7 +6,7 @@
 // @author       Андрей Яценко
 // @match        https://trello.com/*
 // @grant        GM_xmlhttpRequest
-// @updateURL    https://github.com/crymory/test/blob/trello/CompleteWithComment.user.js
+// @updateURL    https://raw.githubusercontent.com/crymory/test/edit/main/CompleteWithComment.user.js
 // ==/UserScript==
 
 (function() {
