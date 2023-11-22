@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Complete with Comment
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.4
 // @description  Custom button to mark Trello card as completed, move it to a specific column, and set a due date with a comment
 // @author       Андрей Яценко
 // @match        https://trello.com/*
