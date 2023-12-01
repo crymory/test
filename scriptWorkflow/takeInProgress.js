@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Take In Progress
 // @namespace    https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Server%20Token&key=9bac3f053d62b776b10ea9ee43863172
-// @version      1.0
+// @version      1.1
 // @description  Для того чтобы скрипт работал нужно заменить на свой ApiToken и TeamMemberUsername
 // @author       rage-
 // @match        https://trello.com/*
