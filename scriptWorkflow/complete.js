@@ -6,7 +6,7 @@
 // @author       rage-
 // @match        https://trello.com/*
 // @grant        GM_xmlhttpRequest
-// @updateURL    https://raw.githubusercontent.com/crymory/trello-helpdesk/main/scriptWorkflow/complete.js
+// @updateURL    https://github.com/crymory/test/raw/main/scriptWorkflow/complete.js
 // ==/UserScript==
 
 (function() {
