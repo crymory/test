@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         Take In Progress
 // @namespace    https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Server%20Token&key=9bac3f053d62b776b10ea9ee43863172
-// @version      1.1
+// @version      1.2
 // @description  Для того чтобы скрипт работал нужно заменить на свой ApiToken и TeamMemberUsername
 // @author       rage-
 // @match        https://trello.com/*
+// @match        https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Server%20Token&key=9bac3f053d62b776b10ea9ee43863172
 // @grant        GM_xmlhttpRequest
 // @updateURL    https://github.com/crymory/test/raw/main/scriptWorkflow/takeInProgress.js
 // ==/UserScript==
@@ -90,7 +91,7 @@
             return;
         }
 
-        const buttonHtml = '<div id="takeInProgressButton" style="cursor: pointer; position: absolute; background-color: #3498db; color: #fff; padding: 6px 12px; width: 110px; border-radius: 5px; font-weight: bold;">Взять в работу</div>';
+        const buttonHtml = '<div id="takeInProgressButton" style="cursor: pointer; position: absolute; background-color: #A1BDD914; color: #fff; padding: 6px 12px; width: 110px; border-radius: 5px; font-weight: regular;">Взять в работу</div>';
         sidebar.appendChild(new DOMParser().parseFromString(buttonHtml, 'text/html').body.firstChild);
 
         const takeInProgressButton = document.getElementById('takeInProgressButton');
