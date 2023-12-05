@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         Take In Progress
 // @namespace    https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Server%20Token&key=9bac3f053d62b776b10ea9ee43863172
-// @version      1.2
+// @version      1.3
 // @description  Для того чтобы скрипт работал нужно заменить на свой ApiToken и TeamMemberUsername
 // @author       rage-
 // @match        https://trello.com/*
 // @match        https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Server%20Token&key=9bac3f053d62b776b10ea9ee43863172
 // @grant        GM_xmlhttpRequest
+// @downloadURL  https://github.com/crymory/test/raw/main/scriptWorkflow/takeInProgress.js
 // @updateURL    https://github.com/crymory/test/raw/main/scriptWorkflow/takeInProgress.js
 // ==/UserScript==
 
@@ -23,29 +24,49 @@
         const currentDate = new Date();
         const commentText = `Взято в работу - ${currentDate.toLocaleString()}`;
 
-        const data = {
-            text: commentText,
-            key: apiKey,
-            token: apiToken,
-        };
-
+        // Check if the card is already in the target column
         GM_xmlhttpRequest({
-            method: 'POST',
-            url: url,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            data: JSON.stringify(data),
+            method: 'GET',
+            url: `https://api.trello.com/1/cards/${cardId}?key=${apiKey}&token=${apiToken}`,
             onload: function (response) {
                 if (response.status === 200) {
-                    console.log('Comment added successfully:', response.responseText);
-                    moveCardInProgress(cardId);
+                    const cardData = JSON.parse(response.responseText);
+                    if (cardData.idList === targetColumnId) {
+                        alert('Warning: This card is already in the "В процессе" column.');
+                    } else {
+                        // Proceed with adding comment and moving the card
+                        const data = {
+                            text: commentText,
+                            key: apiKey,
+                            token: apiToken,
+                        };
+
+                        GM_xmlhttpRequest({
+                            method: 'POST',
+                            url: url,
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            data: JSON.stringify(data),
+                            onload: function (response) {
+                                if (response.status === 200) {
+                                    console.log('Comment added successfully:', response.responseText);
+                                    moveCardInProgress(cardId);
+                                } else {
+                                    console.error('Error adding comment:', response.statusText);
+                                }
+                            },
+                            onerror: function (error) {
+                                console.error('Error adding comment:', error);
+                            }
+                        });
+                    }
                 } else {
-                    console.error('Error adding comment:', response.statusText);
+                    console.error('Error checking card details:', response.statusText);
                 }
             },
             onerror: function (error) {
-                console.error('Error adding comment:', error);
+                console.error('Error checking card details:', error);
             }
         });
     }
@@ -79,7 +100,7 @@
         });
     }
 
-        function createTakeInProgressButton() {
+    function createTakeInProgressButton() {
         const existingButton = document.getElementById('takeInProgressButton');
         if (existingButton) {
             return; // If the button already exists, do nothing
