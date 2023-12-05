@@ -32,7 +32,7 @@
                 if (response.status === 200) {
                     const cardData = JSON.parse(response.responseText);
                     if (cardData.idList === targetColumnId) {
-                        alert('Warning: This card is already in the "В процессе" column.');
+                        alert('Warning: Карточка уже находиться в работе.');
                     } else {
                         // Proceed with adding comment and moving the card
                         const data = {
